@@ -1,4 +1,661 @@
-</section>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MT5 History Thailand</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Tahoma, Arial, sans-serif;
+            background: #07101d;
+            color: #ffffff;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 16, 29, 0.96);
+            border-bottom: 1px solid #273750;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ffe27a, #b77b00);
+            color: #111111;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .brand-title {
+            margin: 0;
+            color: #f3c75c;
+            font-size: 21px;
+        }
+
+        .brand-subtitle {
+            margin: 4px 0 0;
+            color: #94a2b5;
+            font-size: 13px;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            color: #c6cfdd;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #f3c75c;
+        }
+
+        .hero {
+            padding: 55px 0 28px;
+        }
+
+        .hero-box {
+            padding: 38px;
+            border: 1px solid #283953;
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at top right, rgba(243, 199, 92, 0.18), transparent 36%),
+                #101b2c;
+        }
+
+        .hero-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        .hero h2 {
+            margin: 0 0 12px;
+            color: #f3c75c;
+            font-size: clamp(32px, 5vw, 54px);
+        }
+
+        .hero-description {
+            max-width: 730px;
+            color: #aeb9ca;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: #123722;
+            color: #67e39a;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #67e39a;
+            box-shadow: 0 0 12px #67e39a;
+        }
+
+        .account-info {
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .info-item {
+            padding: 17px;
+            border-radius: 14px;
+            background: #0b1525;
+            border: 1px solid #253550;
+        }
+
+        .info-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8392a8;
+            font-size: 13px;
+        }
+
+        .info-value {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 24px 0;
+        }
+
+        .section-title {
+            margin: 0 0 18px;
+            color: #f3c75c;
+            font-size: 25px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            }
+
+        .stat-card {
+            min-height: 150px;
+            padding: 22px;
+            border: 1px solid #273750;
+            border-radius: 17px;
+            background: #111d2e;
+        }
+
+        .stat-card span {
+            color: #8f9eb2;
+            font-size: 14px;
+        }
+
+        .stat-card strong {
+            display: block;
+            margin-top: 13px;
+            font-size: 29px;
+        }
+
+        .stat-card small {
+            display: block;
+            margin-top: 10px;
+            color: #8190a5;
+            line-height: 1.5;
+        }
+
+        .positive {
+            color: #5de391;
+        }
+
+        .negative {
+            color: #ff7474;
+        }
+
+        .gold {
+            color: #f3c75c;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 18px;
+        }
+
+        .panel {
+            padding: 22px;
+            border: 1px solid #273750;
+            border-radius: 17px;
+            background: #111d2e;
+        }
+
+        .chart-area {
+            position: relative;
+            height: 310px;
+            margin-top: 20px;
+            overflow: hidden;
+            border-radius: 12px;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .chart-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-line {
+            fill: none;
+            stroke: #f3c75c;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .chart-area-fill {
+            fill: url(#chartGradient);
+        }
+
+        .summary-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 13px 0;
+            border-bottom: 1px solid #26354c;
+        }
+
+        .summary-row span:first-child {
+            color: #91a0b4;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid #273750;
+        }
+
+        table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+            background: #111d2e;
+        }
+
+        th,
+        td {
+            padding: 15px 14px;
+            text-align: left;
+            border-bottom: 1px solid #273750;
+        }
+
+        th {
+            background: #18263a;
+            color: #f3c75c;
+            font-size: 14px;
+        }
+
+        td {
+            color: #d5dce7;
+            font-size: 14px;
+        }
+
+        .type-buy {
+            color: #61df95;
+            font-weight: bold;
+        }
+
+        .type-sell {
+            color: #ff7f7f;
+            font-weight: bold;
+        }
+
+        .notice {
+            padding: 20px;
+            border: 1px solid #5c4c20;
+            border-radius: 15px;
+            background: #201b0d;
+            color: #d9c98d;
+            line-height: 1.8;
+        }
+
+        .contact-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+            border: 1px solid #273750;
+            border-radius: 17px;
+            background: #111d2e;
+        }
+
+        .contact-box h3 {
+            margin: 0 0 8px;
+            color: #f3c75c;
+        }
+
+        .contact-box p {
+            margin: 0;
+            color: #9ba9bb;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 11px;
+            background: #f3c75c;
+            color: #111111;
+            font-weight: bold;
+        }
+
+        .contact-button:hover {
+            background: #ffda73;
+        }
+
+        footer {
+            margin-top: 35px;
+            padding: 28px 0;
+            text-align: center;
+            border-top: 1px solid #24344d;
+            color: #7f8da1;
+        }
+
+        @media (max-width: 950px) {
+            nav {
+                display: none;
+            }
+
+            .account-info,
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-box {
+                padding: 24px;
+            }
+
+            .hero-top {
+                flex-direction: column;
+            }
+
+            .account-info,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-box {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .brand-title {
+                font-size: 17px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container navbar">
+
+        <div class="brand">
+            <div class="logo">MT5</div>
+
+            <div>
+                <h1 class="brand-title">MT5 History Thailand</h1>
+                <p class="brand-subtitle">เว็บไซต์แสดงประวัติและผลการเทรด</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#หน้าแรก">หน้าแรก</a>
+            <a href="#สถิติ">สถิติการเทรด</a>
+            <a href="#ประวัติ">ประวัติการเทรด</a>
+            <a href="#ติดต่อ">ติดต่อเรา</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+    <section class="hero" id="หน้าแรก">
+        <div class="container">
+
+            <div class="hero-box">
+
+                <div class="hero-top">
+
+                    <div>
+                        <h2>ผลการเทรด MT5</h2>
+
+                        <div class="hero-description">
+                            เว็บไซต์สำหรับแสดงผลการเทรด สถิติ กำไร ขาดทุน
+                            และประวัติการซื้อขายย้อนหลัง เพื่อให้ผู้ชมตรวจสอบข้อมูลได้ง่าย
+                        </div>
+                    </div>
+
+                    <div class="status">
+                        <span class="status-dot"></span>
+                        ระบบทำงานปกติ
+                    </div>
+
+                </div>
+
+                <div class="account-info">
+
+                    <div class="info-item">
+                        <span class="info-label">ชื่อระบบ</span>
+                        <span class="info-value">ระบบเทรดทองคำ</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">ประเภทบัญชี</span>
+                        <span class="info-value">บัญชีทดลอง</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">โบรกเกอร์</span>
+                        <span class="info-value">Exness</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">สินทรัพย์ที่เทรด</span>
+                        <span class="info-value">ทองคำ XAUUSD</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="สถิติ">
+        <div class="container">
+
+            <h2 class="section-title">สถิติการเทรดโดยรวม</h2>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>เงินทุนเริ่มต้น</span>
+                    <strong>10,000 USD</strong>
+                    <small>ยอดเงินเมื่อเริ่มต้นระบบ</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>ยอดเงินปัจจุบัน</span>
+                    <strong>22,500 USD</strong>
+                    <small>ยอดเงินคงเหลือล่าสุด</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>กำไรรวม</span>
+                    <strong class="positive">+12,500 USD</strong>
+                    <small class="positive">เติบโต +125%</small>
+                </div>
+                <div class="stat-card">
+                    <span>การขาดทุนสูงสุด</span>
+                    <strong class="negative">8.40%</strong>
+                    <small>ช่วงขาดทุนสูงสุดของบัญชี</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>อัตราการชนะ</span>
+                    <strong class="gold">78%</strong>
+                    <small>คำนวณจากออเดอร์ที่ปิดแล้ว</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>จำนวนออเดอร์ทั้งหมด</span>
+                    <strong>1,256</strong>
+                    <small>รายการซื้อขายที่ปิดแล้ว</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>กำไรเฉลี่ยต่อวัน</span>
+                    <strong class="positive">+350 USD</strong>
+                    <small>ค่าเฉลี่ยจากข้อมูลที่ผ่านมา</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>วันที่เริ่มใช้งาน</span>
+                    <strong>1 ก.ค. 2569</strong>
+                    <small>อัปเดตข้อมูลล่าสุดวันนี้</small>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <div class="container content-grid">
+
+            <div class="panel">
+
+                <h2 class="section-title">กราฟการเติบโตของบัญชี</h2>
+
+                <div class="chart-area">
+
+                    <svg class="chart-svg" viewBox="0 0 800 300" preserveAspectRatio="none">
+
+                        <defs>
+                            <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#f3c75c" stop-opacity="0.35"></stop>
+                                <stop offset="100%" stop-color="#f3c75c" stop-opacity="0"></stop>
+                            </linearGradient>
+                        </defs>
+
+                        <path
+                            class="chart-area-fill"
+                            d="M0,250
+                               L70,235
+                               L130,245
+                               L200,205
+                               L260,215
+                               L320,170
+                               L390,180
+                               L450,130
+                               L520,145
+                               L590,95
+                               L660,110
+                               L730,55
+                               L800,35
+                               L800,300
+                               L0,300 Z">
+                        </path>
+
+                        <path
+                            class="chart-line"
+                            d="M0,250
+                               L70,235
+                               L130,245
+                               L200,205
+                               L260,215
+                               L320,170
+                               L390,180
+                               L450,130
+                               L520,145
+                               L590,95
+                               L660,110
+                               L730,55
+                               L800,35">
+                        </path>
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <h2 class="section-title">ข้อมูลบัญชี</h2>
+
+                <div class="summary-list">
+
+                    <div class="summary-row">
+                        <span>แพลตฟอร์ม</span>
+                        <strong>MetaTrader 5</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>สกุลเงินบัญชี</span>
+                        <strong>ดอลลาร์สหรัฐ</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>เลเวอเรจ</span>
+                        <strong>1:500</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>ประเภทการเทรด</span>
+                        <strong>ระบบอัตโนมัติ</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>เวลาที่ใช้</span>
+                        <strong>เวลาไทย</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>อัปเดตล่าสุด</span>
+                        <strong>วันนี้ 01:30 น.</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
 
     <section id="ประวัติ">
         <div class="container">
@@ -6,7 +663,9 @@
             <h2 class="section-title">ประวัติการเทรดล่าสุด</h2>
 
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
                         <tr>
                             <th>วันที่</th>
@@ -20,6 +679,7 @@
                     </thead>
 
                     <tbody>
+
                         <tr>
                             <td>12 ก.ค. 2569</td>
                             <td>ทองคำ</td>
@@ -69,8 +729,11 @@
                             <td>3,331.00</td>
                             <td class="positive">+110.00 USD</td>
                         </tr>
+
                     </tbody>
+
                 </table>
+
             </div>
 
         </div>
@@ -78,18 +741,24 @@
 
     <section>
         <div class="container">
+
             <div class="notice">
+
                 <strong>คำชี้แจงสำคัญ:</strong>
-                ตัวเลขในหน้าเว็บไซต์นี้เป็นข้อมูลตัวอย่างสำหรับการออกแบบเว็บไซต์
-                ก่อนนำเว็บไซต์ไปให้ลูกค้าดู ควรเปลี่ยนเป็นผลการเทรดจริงของบัญชี
-                และระบุให้ชัดเจนว่าเป็นบัญชีจริง บัญชีทดลอง หรือผลทดสอบย้อนหลัง
-                การลงทุนและการซื้อขายมีความเสี่ยง ผู้ใช้งานควรศึกษาข้อมูลก่อนตัดสินใจ
+                ตัวเลขทั้งหมดในเว็บไซต์นี้เป็นข้อมูลตัวอย่างสำหรับการออกแบบเว็บไซต์
+                ก่อนนำไปเผยแพร่หรือให้ลูกค้าดู ควรเปลี่ยนเป็นข้อมูลจริงของบัญชี
+                และควรระบุให้ชัดเจนว่าเป็นบัญชีจริง บัญชีทดลอง
+                หรือผลการทดสอบย้อนหลัง การลงทุนและการซื้อขายมีความเสี่ยง
+                ผู้ใช้งานควรศึกษาข้อมูลก่อนตัดสินใจ
+
             </div>
+
         </div>
     </section>
 
     <section id="ติดต่อ">
         <div class="container">
+
             <div class="contact-box">
 
                 <div>
@@ -102,6 +771,7 @@
                 </a>
 
             </div>
+
         </div>
     </section>
 
